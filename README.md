@@ -99,7 +99,7 @@ This repository contains categorized Java programming concepts and lab practices
 
 ```bash
 BridgeLabz-SIPP-Training/
-├── Core-Java
+├── 📌 Core-Java
   │
   ├── ProgrammingElements/
   │
@@ -112,7 +112,7 @@ BridgeLabz-SIPP-Training/
   ├── String/
   │
   └── BuiltIn_Function/
-├── OOPs
+├── 📌 OOPs
   │
   ├──Class and Objects
 
