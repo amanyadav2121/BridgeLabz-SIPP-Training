@@ -1,0 +1,23 @@
+CLASS TaskOrganizer
+    ATTRIBUTE: tasks = LinkedHashMap<Integer, String>
+    ATTRIBUTE: taskId = 0
+
+    METHOD addTask(description)
+        taskId++
+        tasks[taskId] = description
+
+    METHOD removeTask(taskId)
+        tasks.REMOVE(taskId)
+
+    METHOD viewTasks()
+        FOR EACH key,value IN tasks (in insertion order)
+            PRINT key + " → " + value
+
+MAIN
+    organizer = NEW TaskOrganizer()
+    organizer.addTask("Check emails")
+    organizer.addTask("Prepare sales report")
+    organizer.addTask("Call client")
+
+    organizer.removeTask(2)
+    organizer.viewTasks()

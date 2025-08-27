@@ -1,0 +1,31 @@
+CLASS Vehicle
+    ATTRIBUTES: vehicleNumber, entryTime
+    METHOD calculateFee(exitTime)
+        PRINT "Base fee calculation - overridden in subclasses"
+
+CLASS Car EXTENDS Vehicle
+    METHOD calculateFee(exitTime)
+        hours = CEIL(exitTime - entryTime in hours)
+        fee = 50 + (hours - 1) * 30
+        RETURN fee
+
+CLASS Bike EXTENDS Vehicle
+    METHOD calculateFee(exitTime)
+        hours = CEIL(exitTime - entryTime in hours)
+        fee = 20 + (hours - 1) * 10
+        RETURN fee
+
+CLASS Truck EXTENDS Vehicle
+    METHOD calculateFee(exitTime)
+        hours = CEIL(exitTime - entryTime in hours)
+        fee = 100 + (hours - 1) * 50
+        RETURN fee
+
+MAIN
+    car1 = NEW Car("KA05AB1234", 10:00 AM)
+    bike1 = NEW Bike("KA05XY7890", 11:15 AM)
+    truck1 = NEW Truck("KA09TR5566", 09:30 AM)
+
+    PRINT car1.vehicleNumber + " Fee: " + car1.calculateFee(1:30 PM)
+    PRINT bike1.vehicleNumber + " Fee: " + bike1.calculateFee(12:00 PM)
+    PRINT truck1.vehicleNumber + " Fee: " + truck1.calculateFee(2:00 PM)

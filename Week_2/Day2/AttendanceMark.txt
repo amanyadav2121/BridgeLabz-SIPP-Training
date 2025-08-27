@@ -1,0 +1,33 @@
+CLASS AttendanceSystem
+    ATTRIBUTE: attendance[30][30]  // 30 students × 30 days
+
+    METHOD markAttendance(studentId, day, status)   // status = 1 (Present), 0 (Absent)
+        attendance[studentId][day] = status
+
+    METHOD dailySummary(day)
+        count = 0
+        FOR student = 1 TO 30
+            IF attendance[student][day] == 1
+                count++
+        PRINT "Day " + day + ": " + count + " students present"
+
+    METHOD monthlySummary(studentId)
+        presentCount = 0
+        FOR day = 1 TO 30
+            IF attendance[studentId][day] == 1
+                presentCount++
+        PRINT "Student " + studentId + " present " + presentCount + " days"
+
+    METHOD defaulterList()
+        FOR student = 1 TO 30
+            presentCount = SUM(attendance[student][:])
+            IF presentCount < 22   // 75% of 30 days
+                PRINT "Defaulter: Student " + student
+
+MAIN
+    system = NEW AttendanceSystem()
+    system.markAttendance(1, 1, 1)
+    system.markAttendance(3, 1, 0)
+    system.dailySummary(10)
+    system.monthlySummary(5)
+    system.defaulterList()

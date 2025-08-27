@@ -1,0 +1,35 @@
+CLASS SurveyResponse
+    ATTRIBUTES: restaurantName, rating
+
+FUNCTION generateSurveyReport(responses)
+    restaurantRatings = Map<Restaurant, List<Integer>>
+
+    // Group ratings by restaurant
+    FOR EACH response IN responses
+        restaurantRatings[response.restaurantName].ADD(response.rating)
+
+    // Compute averages
+    avgRatings = Map<Restaurant, Double>
+    FOR EACH restaurant IN restaurantRatings
+        avg = SUM(restaurantRatings[restaurant]) / COUNT(restaurantRatings[restaurant])
+        avgRatings[restaurant] = avg
+
+    // Find highest and lowest
+    bestRestaurant = RESTAURANT WITH MAX(avgRatings)
+    worstRestaurant = RESTAURANT WITH MIN(avgRatings)
+
+    PRINT "Average Ratings by Restaurant: " + avgRatings
+    PRINT "Best Restaurant: " + bestRestaurant
+    PRINT "Needs Improvement: " + worstRestaurant
+
+MAIN
+    responses = [
+        NEW SurveyResponse("PizzaHut", 4),
+        NEW SurveyResponse("PizzaHut", 5),
+        NEW SurveyResponse("KFC", 3),
+        NEW SurveyResponse("KFC", 4),
+        NEW SurveyResponse("Subway", 5),
+        NEW SurveyResponse("Subway", 4),
+        NEW SurveyResponse("Subway", 5)
+    ]
+    generateSurveyReport(responses)

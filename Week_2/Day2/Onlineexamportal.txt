@@ -1,0 +1,27 @@
+CLASS User
+    ATTRIBUTES: username, password
+    METHOD login()
+        PRINT "Generic login - override in subclass"
+
+CLASS Student EXTENDS User
+    ATTRIBUTE: enrolled (boolean)
+    METHOD login()
+        IF username AND password are valid AND enrolled == true
+            PRINT "Student logged in → show available exams"
+        ELSE
+            PRINT "Login failed - not enrolled or invalid credentials"
+
+CLASS Admin EXTENDS User
+    ATTRIBUTE: adminPrivileges (boolean)
+    METHOD login()
+        IF username AND password are valid AND adminPrivileges == true
+            PRINT "Admin logged in → show exam management tools"
+        ELSE
+            PRINT "Login failed - no admin access"
+
+MAIN
+    s1 = NEW Student("john123", "pass123", enrolled=true)
+    s1.login()
+
+    a1 = NEW Admin("admin007", "secret", adminPrivileges=true)
+    a1.login()

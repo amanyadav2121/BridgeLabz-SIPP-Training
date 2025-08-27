@@ -1,0 +1,36 @@
+CLASS Ticket
+    ATTRIBUTES: movieName, seatNumber, price, bookingStatus
+    METHOD constructor(movie, seat, price)
+        SET movieName = movie
+        SET seatNumber = seat
+        SET price = price
+        SET bookingStatus = "Booked"
+    METHOD cancel()
+        SET bookingStatus = "Cancelled"
+
+CLASS Theatre
+    ATTRIBUTES: movieSchedule, availableSeats, issuedTickets
+    METHOD bookTicket(movie, seat, customer)
+        IF seat in availableSeats
+            ticket = NEW Ticket(movie, seat, price=200)
+            issuedTickets.ADD(ticket)
+            availableSeats.REMOVE(seat)
+            RETURN ticket
+        ELSE
+            PRINT "Seat not available"
+    METHOD cancelTicket(ticket)
+        ticket.cancel()
+        availableSeats.ADD(ticket.seatNumber)
+
+CLASS Customer
+    ATTRIBUTES: name
+    METHOD bookMovie(theatre, movie, seat)
+        RETURN theatre.bookTicket(movie, seat, self)
+    METHOD cancelBooking(theatre, ticket)
+        theatre.cancelTicket(ticket)
+
+MAIN
+    customer1 = NEW Customer("Ravi")
+    theatre = NEW Theatre(movies={"Avengers: Endgame"})
+    ticket1 = customer1.bookMovie(theatre, "Avengers: Endgame", "A12")
+    customer1.cancelBooking(theatre, ticket1)

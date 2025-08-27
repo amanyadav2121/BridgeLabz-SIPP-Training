@@ -1,0 +1,16 @@
+FUNCTION wordCounter(paragraph)
+    words = SPLIT paragraph BY spaces
+    frequencyMap = EMPTY Map<String, Integer>
+
+    FOR EACH word IN words
+        cleanedWord = LOWERCASE(REMOVE_PUNCTUATION(word))
+        frequencyMap[cleanedWord]++
+    
+    SORT frequencyMap BY value (descending)
+
+    FOR EACH (word, count) IN frequencyMap
+        PRINT word + " → " + count
+
+MAIN
+    text = "The news today is about the rise in technology trends."
+    wordCounter(text)
