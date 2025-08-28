@@ -1,0 +1,41 @@
+CLASS Student
+    name, marks
+
+FUNCTION mergeSort(studentList)
+    IF size(studentList) <= 1
+        RETURN studentList
+
+    mid = size / 2
+    left = mergeSort(first half)
+    right = mergeSort(second half)
+
+    RETURN merge(left, right)
+
+FUNCTION merge(left, right)
+    result = []
+    WHILE left NOT EMPTY AND right NOT EMPTY
+        IF left[0].marks > right[0].marks
+            ADD left[0] TO result
+            REMOVE left[0]
+        ELSE IF left[0].marks == right[0].marks
+            IF left[0].name < right[0].name
+                ADD left[0]
+                REMOVE left[0]
+            ELSE
+                ADD right[0]
+                REMOVE right[0]
+        ELSE
+            ADD right[0]
+            REMOVE right[0]
+
+    ADD remaining left, right TO result
+    RETURN result
+
+// Simulation
+students = [ ("Amit", 92), ("Bhavna", 92), ("Kiran", 85), ("Dinesh", 78), ("Charu", 92) ]
+
+sortedList = mergeSort(students)
+
+PRINT "Final Rank List:"
+FOR EACH student IN sortedList
+    PRINT student.name + " - " + student.marks

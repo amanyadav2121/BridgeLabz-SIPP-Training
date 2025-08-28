@@ -1,0 +1,27 @@
+CLASS Room
+    PROTECTED roomNumber, customerName, daysStayed
+    CONSTRUCTOR(roomNumber, customerName, daysStayed)
+    METHOD calculateBill() → ABSTRACT / OVERRIDE in subclasses
+
+CLASS DeluxeRoom EXTENDS Room
+    PRIVATE rate = 3000
+    OVERRIDE METHOD calculateBill()
+        RETURN daysStayed * rate
+
+CLASS SuiteRoom EXTENDS Room
+    PRIVATE rate = 5000
+    OVERRIDE METHOD calculateBill()
+        RETURN daysStayed * rate
+
+// Simulation
+raviBooking = new DeluxeRoom(101, "Ravi", 3)
+PRINT "Room Type: Deluxe"
+PRINT "Customer: " + raviBooking.customerName
+PRINT "Nights Stayed: " + raviBooking.daysStayed
+PRINT "Total Bill: ₹" + raviBooking.calculateBill()
+
+anitaBooking = new SuiteRoom(201, "Anita", 2)
+PRINT "Room Type: Suite"
+PRINT "Customer: " + anitaBooking.customerName
+PRINT "Nights Stayed: " + anitaBooking.daysStayed
+PRINT "Total Bill: ₹" + anitaBooking.calculateBill()

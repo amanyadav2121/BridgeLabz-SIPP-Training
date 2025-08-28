@@ -1,0 +1,31 @@
+CLASS Transaction<T>
+    PRIVATE paymentDetails
+    CONSTRUCTOR(paymentDetails)
+        this.paymentDetails = paymentDetails
+    
+    METHOD processPayment()
+        IF paymentDetails IS UPI
+            PRINT "Payment of ₹" + paymentDetails.amount + " via UPI successful for " + paymentDetails.merchantName
+        ELSE IF paymentDetails IS Card
+            PRINT "Payment of ₹" + paymentDetails.amount + " via Card ending " + last4Digits(paymentDetails.cardNumber) + " successful for " + paymentDetails.merchantName
+        ELSE IF paymentDetails IS NetBanking
+            PRINT "Payment of ₹" + paymentDetails.amount + " via NetBanking (" + paymentDetails.bankName + ") successful."
+
+CLASS UPI
+    upiId, amount, merchantName
+
+CLASS Card
+    cardNumber, cvv, expiryDate, amount, merchantName
+
+CLASS NetBanking
+    bankName, accountNumber, amount
+
+// Simulation
+t1 = new Transaction( new UPI("ramesh@upi", 1200, "Amazon") )
+t1.processPayment()
+
+t2 = new Transaction( new Card("1234-5678-9876-5432", "123", "12/27", 5000, "MakeMyTrip") )
+t2.processPayment()
+
+t3 = new Transaction( new NetBanking("HDFC", "00112233", 8000) )
+t3.processPayment()

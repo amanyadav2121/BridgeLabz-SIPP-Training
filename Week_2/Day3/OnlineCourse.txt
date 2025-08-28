@@ -1,0 +1,36 @@
+CLASS Course
+    PRIVATE title, duration, price
+    CONSTRUCTOR(title, duration, price)
+    GETTERS for title, duration, price
+
+CLASS Student
+    PRIVATE name, email, enrolledCourses (List<Course>)
+    CONSTRUCTOR(name, email)
+    
+    METHOD enrollCourse(course)
+        IF course NOT IN enrolledCourses
+            ADD course TO enrolledCourses
+            PRINT name + " enrolled in " + course.title
+        ELSE
+            PRINT "Already enrolled in " + course.title
+
+    METHOD viewEnrolledCourses()
+        PRINT name + "'s Enrolled Courses:"
+        FOR EACH course IN enrolledCourses
+            PRINT course.title + " - " + course.duration + " - ₹" + course.price
+
+// Simulation
+course1 = new Course("Java Programming Basics", "6 weeks", 4999)
+course2 = new Course("Data Structures in Java", "8 weeks", 5999)
+course3 = new Course("Spring Boot for Web Development", "10 weeks", 6999)
+
+student1 = new Student("Amit", "amit@email")
+student1.enrollCourse(course1)
+student1.enrollCourse(course2)
+
+student2 = new Student("Priya", "priya@email")
+student2.enrollCourse(course3)
+student2.enrollCourse(course1)
+
+student1.viewEnrolledCourses()
+student2.viewEnrolledCourses()
